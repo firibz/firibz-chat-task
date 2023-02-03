@@ -82,7 +82,7 @@
               <q-item clickable>
                 <q-item-section>Settings</q-item-section>
               </q-item>
-              <q-item clickable>
+              <q-item @click="logoutUser" clickable>
                 <q-item-section>Logout</q-item-section>
               </q-item>
             </q-list>

@@ -20,18 +20,18 @@
 // export default routes;
 
 const routes = [
-  // {
-  //   path: "/",
-  //   component: () => import("layouts/MyLayout.vue"),
-  //   children: [
-  //     { path: "", component: () => import("pages/PageUsers.vue") },
-  //     {
-  //       path: "/chat/:otherUserId",
-  //       component: () => import("pages/PageChat.vue"),
-  //     },
-  //     { path: "/auth", component: () => import("pages/PageAuth.vue") },
-  //   ],
-  // },
+  {
+    path: "/auth",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [
+      // { path: "", component: () => import("pages/PageUsers.vue") },
+      // {
+      //   path: "/chat/:otherUserId",
+      //   component: () => import("pages/PageChat.vue"),
+      // },
+      { path: "/", component: () => import("pages/PageAuth.vue") },
+    ],
+  },
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
