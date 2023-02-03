@@ -15,8 +15,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^9.16.0",
-    "quasar": "^1.0.0",
-    "vue-lottie": "^0.2.1"
+    "quasar": "^1.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
