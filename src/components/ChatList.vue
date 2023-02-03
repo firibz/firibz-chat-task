@@ -77,7 +77,9 @@ export default {
       if (this.search) {
         let filteredUsers = {};
         for (let key in this.users) {
-          if (this.users[key].name.includes(this.search)) {
+          let searchTerm = this.search.toLowerCase();
+          let userName = this.users[key].name.toLowerCase();
+          if (userName.includes(searchTerm)) {
             filteredUsers[key] = this.users[key];
           }
         }
