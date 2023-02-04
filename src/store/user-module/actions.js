@@ -17,7 +17,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-export function registerUser({}, payload) {
+export function registerUser({ dispatch }, payload) {
   createUserWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
       let userId = firebaseAuth.currentUser.uid;
@@ -26,21 +26,26 @@ export function registerUser({}, payload) {
         email: payload.email,
         online: true,
       });
+      dispatch("alert/success", "Your account is registered successfully.", {
+        root: true,
+      });
       this.$router.push("/");
       // setting user details in the store is handled in handleAuthStateChanged action
     })
     .catch((error) => {
+      dispatch("alert/error", error.message, { root: true });
       console.log(error.message);
     });
 }
 
-export function loginUser({}, payload) {
+export function loginUser({ dispatch }, payload) {
   signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
       this.$router.push("/");
       // setting user details in the store is handled in handleAuthStateChanged action
     })
     .catch((error) => {
+      dispatch("alert/error", error.message, { root: true });
       console.log(error.message);
     });
 }
@@ -118,6 +123,7 @@ export function firebaseGetUsers({ commit }) {
       }
     })
     .catch((error) => {
+      dispatch("alert/error", error.message, { root: true });
       console.error(error);
     })
     .finally(() => {

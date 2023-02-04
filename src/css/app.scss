@@ -12,6 +12,7 @@
   --q-color-system-grey: #737373;
   --q-color-system-negative: #ea338f;
   --q-color-system-success: #99ffb1;
+  --q-color-system-warning:  #ffc107;
   --q-color-system-primary-light: #3f51b5;
   --q-color-system-primary-dark: #8c9eff;
   --q-color-system-caption-light: #8c9eff;
@@ -38,6 +39,13 @@
 }
 .bg-system-success {
   background: var(--q-color-system-success) !important;
+}
+
+.text-system-warning {
+  color: var(--q-color-system-warning) !important;
+}
+.bg-system-warning {
+  background: var(--q-color-system-warning) !important;
 }
 
 .text-system-grey {

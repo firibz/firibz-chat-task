@@ -3,7 +3,10 @@ import { ref, onChildAdded, off, push, get } from "firebase/database";
 
 let messagesRef;
 
-export function firebaseGetMessages({ commit, rootState }, otherUserId) {
+export function firebaseGetMessages(
+  { commit, dispatch, rootState },
+  otherUserId
+) {
   let userId =
     rootState.user.userDetails.userId ||
     JSON.parse(localStorage.getItem("user"));
@@ -19,6 +22,7 @@ export function firebaseGetMessages({ commit, rootState }, otherUserId) {
       }
     })
     .catch((error) => {
+      dispatch("alert/error", error.message, { root: true });
       console.error(error);
     })
     .finally(() => {

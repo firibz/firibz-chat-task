@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import user from "./user-module";
 import chat from "./chat-module";
+import alert from "./alert-module";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default function (/* { ssrContext } */) {
     modules: {
       user,
       chat,
+      alert,
     },
 
     // enable strict mode (adds overhead!)
