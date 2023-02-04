@@ -18,15 +18,14 @@ import {
 export function registerUser({}, payload) {
   createUserWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
-      console.log(response);
-      console.log("firebaseAuth.currentUser.uid");
-      console.log(firebaseAuth.currentUser.uid);
       let userId = firebaseAuth.currentUser.uid;
       set(ref(firebaseDb, "users/" + userId), {
         name: payload.name,
         email: payload.email,
         online: true,
       });
+      this.$router.push("/");
+      // setting user details in the store is handled in handleAuthStateChanged action
     })
     .catch((error) => {
       console.log(error.message);
@@ -36,7 +35,8 @@ export function registerUser({}, payload) {
 export function loginUser({}, payload) {
   signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
-      console.log(response);
+      this.$router.push("/");
+      // setting user details in the store is handled in handleAuthStateChanged action
     })
     .catch((error) => {
       console.log(error.message);
@@ -45,6 +45,7 @@ export function loginUser({}, payload) {
 
 export function logoutUser() {
   signOut(firebaseAuth);
+  // removing user details in the store is handled in handleAuthStateChanged action
 }
 
 export function handleAuthStateChanged({ commit, dispatch, state }) {
@@ -52,14 +53,6 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
     if (user) {
       // User is logged in.
       let userId = firebaseAuth.currentUser.uid;
-      // firebaseDb.ref("users/" + userId).once("value", (snapshot) => {
-      //   let userDetails = snapshot.val();
-      //   commit("setUserDetails", {
-      //     name: userDetails.name,
-      //     email: userDetails.email,
-      //     userId: userId,
-      //   });
-      // });
       onValue(
         ref(firebaseDb, "/users/" + userId),
         (snapshot) => {
@@ -85,7 +78,7 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
         },
       });
       dispatch("firebaseGetUsers");
-      this.$router.push("/");
+      // this.$router.push("/");
     } else {
       // User is logged out.
       dispatch("firebaseUpdateUser", {
@@ -95,28 +88,24 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
         },
       });
       commit("setUserDetails", {});
-      this.$router.replace("/auth");
+      localStorage.removeItem("user");
+
+      if (this.$router.currentRoute.meta.requiresAuth) {
+        console.log("logged out");
+        this.$router.replace("/auth");
+      }
     }
   });
 }
 
 export function firebaseUpdateUser({}, payload) {
   if (payload.userId) {
-    // firebaseDb.ref("users/" + payload.userId).update(payload.updates);
     update(ref(firebaseDb, "users/" + payload.userId), payload.updates);
   }
 }
 
 export function firebaseGetUsers({ commit }) {
   const usersRef = ref(firebaseDb, "users");
-  // firebaseDb.ref("users").on("child_added", (snapshot) => {
-  //   let userDetails = snapshot.val();
-  //   let userId = snapshot.key;
-  //   commit("addUser", {
-  //     userId,
-  //     userDetails,
-  //   });
-  // });
   onChildAdded(usersRef, (snapshot) => {
     let userDetails = snapshot.val();
     let userId = snapshot.key;
@@ -125,14 +114,7 @@ export function firebaseGetUsers({ commit }) {
       userDetails,
     });
   });
-  // firebaseDb.ref("users").on("child_changed", (snapshot) => {
-  //   let userDetails = snapshot.val();
-  //   let userId = snapshot.key;
-  //   commit("updateUser", {
-  //     userId,
-  //     userDetails,
-  //   });
-  // });
+
   onChildChanged(usersRef, (snapshot) => {
     let userDetails = snapshot.val();
     let userId = snapshot.key;

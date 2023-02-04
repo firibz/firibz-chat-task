@@ -4,7 +4,9 @@ import { ref, onChildAdded, off, push } from "firebase/database";
 let messagesRef;
 
 export function firebaseGetMessages({ commit, rootState }, otherUserId) {
-  let userId = rootState.user.userDetails.userId;
+  let userId =
+    rootState.user.userDetails.userId ||
+    JSON.parse(localStorage.getItem("user"));
   messagesRef = ref(firebaseDb, "chats/" + userId + "/" + otherUserId);
   // commit("showLoading", true);
   onChildAdded(messagesRef, (snapshot) => {
