@@ -5,6 +5,9 @@ export function showLoading(state, payload) {
 export function addMessage(state, payload) {
   Vue.set(state.messages, payload.messageId, payload.messageDetails);
 }
+export function addAllMessages(state, payload) {
+  state.messages = payload;
+}
 export function clearMessages(state) {
   state.messages = {};
 }

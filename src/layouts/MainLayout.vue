@@ -1,54 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header
-      class="system-header"
-      v-if="$route.fullPath.includes('/chat')"
-      elevated
-    >
-      <q-toolbar>
-        <!-- <q-btn round flat icon="keyboard_arrow_left" class="q-mr-sm" to="/" /> -->
-        <q-btn to="/" icon="keyboard_arrow_left" flat round class="q-mr-sm" />
-        <q-btn round flat>
-          <q-avatar>
-            <img :src="currentConversation.avatar" />
-            <!-- <q-icon name="mdi-account" /> -->
-          </q-avatar>
-        </q-btn>
-
-        <span class="q-subtitle-1 q-pl-md">
-          {{ otherUserDetails.name }}
-        </span>
-
-        <q-space />
-
-        <q-btn round flat icon="search" />
-        <q-btn round flat icon="more_vert">
-          <q-menu auto-close :offset="[110, 0]">
-            <q-list style="min-width: 150px">
-              <q-item clickable>
-                <q-item-section>Contact data</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Block</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Select messages</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Silence</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Clear messages</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section>Erase messages</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </q-btn>
-      </q-toolbar>
-    </q-header>
-
     <q-drawer
       v-model="leftDrawerOpen"
       v-if="!$route.fullPath.includes('/chat') || $q.screen.gt.xs"

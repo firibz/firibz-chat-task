@@ -6,6 +6,8 @@ import {
   update,
   onChildAdded,
   onChildChanged,
+  child,
+  get,
 } from "firebase/database";
 
 import {
@@ -106,6 +108,22 @@ export function firebaseUpdateUser({}, payload) {
 
 export function firebaseGetUsers({ commit }) {
   const usersRef = ref(firebaseDb, "users");
+  commit("showLoading", true);
+  get(ref(firebaseDb, "users"))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        commit("addAllUsers", snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      commit("showLoading", false);
+    });
+
   onChildAdded(usersRef, (snapshot) => {
     let userDetails = snapshot.val();
     let userId = snapshot.key;

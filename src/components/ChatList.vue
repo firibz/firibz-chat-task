@@ -15,6 +15,10 @@
       </q-input>
     </q-toolbar>
     <q-scroll-area style="height: calc(100% - 50px)">
+      <q-inner-loading v-if="usersLoading" :showing="true">
+        <q-spinner-hearts color="teal" size="7em" />
+        <div class="text-bold text-center text-teal">Loading...</div>
+      </q-inner-loading>
       <q-list v-if="filteredUsers && Object.keys(filteredUsers).length > 0">
         <q-item
           active-class="text-bold text-system-primary"
@@ -67,12 +71,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "ChatList",
   computed: {
     ...mapGetters("user", ["users"]),
+    ...mapState("user", ["usersLoading"]),
     filteredUsers() {
       if (this.search) {
         let filteredUsers = {};

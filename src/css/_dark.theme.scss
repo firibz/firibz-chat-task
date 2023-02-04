@@ -91,6 +91,9 @@
     background-image: linear-gradient(45deg, transparent 20%, #37474f 25%, transparent 25%), linear-gradient(-45deg, transparent 20%, #37474f 25%, transparent 25%), linear-gradient(-45deg, transparent 75%, #37474f 80%, transparent 0);
     background-size: 30px 30px, 30px 30px;
   }
+  .bg-loading{
+    background: rgba(0, 0, 0, 0.4);
+  }
 
   @mixin systemInputBg($bgColor, $focusBgColor) {
     .q-field__inner {

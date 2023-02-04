@@ -1,8 +1,55 @@
 <template>
-  <q-page ref="pageChat" class="flex column chat-background-pattern">
+  <q-page
+    ref="pageChat"
+    class="flex column chat-background-pattern relative-position"
+  >
     <!-- <q-banner v-if="!otherUserDetails.online" class="text-center">
       {{ otherUserDetails.name }} is offline.
     </q-banner> -->
+    <q-header class="system-header" elevated>
+      <q-toolbar>
+        <!-- <q-btn round flat icon="keyboard_arrow_left" class="q-mr-sm" to="/" /> -->
+        <q-btn to="/" icon="keyboard_arrow_left" flat round class="q-mr-sm" />
+        <q-btn round flat>
+          <q-avatar>
+            <!-- <img :src="currentConversation.avatar" /> -->
+            <q-icon name="mdi-account" />
+          </q-avatar>
+        </q-btn>
+
+        <span class="q-subtitle-1 q-pl-md">
+          {{ otherUserDetails.name }}
+        </span>
+
+        <q-space />
+
+        <q-btn round flat icon="search" />
+        <q-btn round flat icon="more_vert">
+          <q-menu auto-close :offset="[110, 0]">
+            <q-list style="min-width: 150px">
+              <q-item clickable>
+                <q-item-section>Contact data</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Block</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Select messages</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Silence</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Clear messages</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Erase messages</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+      </q-toolbar>
+    </q-header>
     <q-page-sticky
       v-if="
         otherUserDetails &&
@@ -16,12 +63,14 @@
         {{ otherUserDetails.name }} is offline.
       </q-banner>
     </q-page-sticky>
-    <!-- <q-inner-loading v-if="messagesLoading" :showing="true">
-      <q-spinner-hearts color="teal" size="7em" />
-      <div class="text-bold text-center text-teal">Loading...</div>
-    </q-inner-loading> -->
+    <div v-if="messagesLoading" class="absolute-center fit bg-loading">
+      <div class="absolute-center">
+        <q-spinner-comment color="teal" size="7em" />
+        <div class="text-bold text-center text-teal">Loading...</div>
+      </div>
+    </div>
     <div
-      v-if="messages && Object.keys(messages).length > 0"
+      v-else-if="messages && Object.keys(messages).length > 0"
       :class="{ invisible: !showMessages }"
       class="q-pa-md column col justify-end"
     >
@@ -51,7 +100,6 @@
             dense
             class="full-width system-white-input"
             v-model="newMessage"
-            @blur="scrollToBottom"
             ref="newMessage"
             placeholder="Type a message"
           />
@@ -91,7 +139,7 @@ export default {
   },
   computed: {
     ...mapState("user", ["userDetails"]),
-    ...mapState("chat", ["messages"]),
+    ...mapState("chat", ["messages", "messagesLoading"]),
   },
   methods: {
     ...mapActions("chat", [

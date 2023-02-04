@@ -1,5 +1,5 @@
 import { firebaseDb } from "boot/firebase";
-import { ref, onChildAdded, off, push } from "firebase/database";
+import { ref, onChildAdded, off, push, get } from "firebase/database";
 
 let messagesRef;
 
@@ -8,7 +8,22 @@ export function firebaseGetMessages({ commit, rootState }, otherUserId) {
     rootState.user.userDetails.userId ||
     JSON.parse(localStorage.getItem("user"));
   messagesRef = ref(firebaseDb, "chats/" + userId + "/" + otherUserId);
-  // commit("showLoading", true);
+  commit("showLoading", true);
+  get(messagesRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        commit("addAllMessages", snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      commit("showLoading", false);
+    });
   onChildAdded(messagesRef, (snapshot) => {
     let messageDetails = snapshot.val();
     let messageId = snapshot.key;
@@ -16,7 +31,6 @@ export function firebaseGetMessages({ commit, rootState }, otherUserId) {
       messageId,
       messageDetails,
     });
-    // commit("showLoading", false);
   });
 }
 
