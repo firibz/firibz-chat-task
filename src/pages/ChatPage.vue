@@ -12,8 +12,10 @@
         <q-btn to="/" icon="keyboard_arrow_left" flat round class="q-mr-sm" />
         <q-btn round flat>
           <q-avatar>
-            <!-- <img :src="currentConversation.avatar" /> -->
-            <q-icon name="mdi-account" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1141/1141031.png"
+            />
+            <!-- <q-icon name="mdi-account" /> -->
           </q-avatar>
         </q-btn>
 

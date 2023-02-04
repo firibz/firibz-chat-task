@@ -66,75 +66,21 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import mixinOtherUserDetails from "src/mixins/mixin-other-user-details.js";
 import ChatList from "components/ChatList.vue";
-
-const conversations = [
-  {
-    id: 1,
-    person: "Razvan Stoenescu",
-    avatar: "https://cdn.quasar.dev/team/razvan_stoenescu.jpeg",
-    caption: "I'm working on Quasar!",
-    time: "15:00",
-    sent: true,
-  },
-  {
-    id: 2,
-    person: "Dan Popescu",
-    avatar: "https://cdn.quasar.dev/team/dan_popescu.jpg",
-    caption: "I'm working on Quasar!",
-    time: "16:00",
-    sent: true,
-  },
-  {
-    id: 3,
-    person: "Jeff Galbraith",
-    avatar: "https://cdn.quasar.dev/team/jeff_galbraith.jpg",
-    caption: "I'm working on Quasar!",
-    time: "18:00",
-    sent: true,
-  },
-  {
-    id: 4,
-    person: "Allan Gaunt",
-    avatar: "https://cdn.quasar.dev/team/allan_gaunt.png",
-    caption: "I'm working on Quasar!",
-    time: "17:00",
-    sent: true,
-  },
-];
 
 export default {
   name: "MainLayout",
   components: {
     ChatList,
   },
-  mixins: [mixinOtherUserDetails],
   computed: {
     ...mapState("user", ["userDetails"]),
-    title() {
-      let pageTitle = "Chat";
-      let currentPath = this.$route.fullPath;
-      if (currentPath == "/") {
-        pageTitle = "Firibz chat app";
-      } else if (currentPath.includes("/chat")) {
-        pageTitle = this.otherUserDetails.name;
-      } else if (currentPath == "/auth") {
-        pageTitle = "Login";
-      }
-      return pageTitle;
-    },
-    currentConversation() {
-      return this.conversations[this.currentConversationIndex];
-    },
   },
   data() {
     return {
       leftDrawerOpen: false,
       search: "",
       message: "",
-      currentConversationIndex: 0,
-      conversations: conversations,
       appTheme: true,
     };
   },
@@ -152,9 +98,6 @@ export default {
     ...mapActions("user", ["logoutUser"]),
     toggleLeftDrawer() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
-    },
-    setCurrentConversation(index) {
-      this.currentConversationIndex = index;
     },
     toggleTheme(value) {
       console.log("value");
