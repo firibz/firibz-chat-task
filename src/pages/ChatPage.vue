@@ -19,7 +19,7 @@
           </q-avatar>
         </q-btn>
 
-        <span class="q-subtitle-1 q-pl-md">
+        <span class="q-subtitle-1 q-pl-md ellipsis">
           {{ otherUserDetails.name }}
         </span>
 

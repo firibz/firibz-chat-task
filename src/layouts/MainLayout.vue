@@ -15,7 +15,9 @@
         <q-avatar class="cursor-pointer q-ml-sm">
           <img src="~assets/axon-logo.webp" />
         </q-avatar>
-        <span class="text-bold text-teal q-ml-sm">{{ userDetails.name }}</span>
+        <span class="text-bold text-teal q-ml-sm ellipsis">{{
+          userDetails.name
+        }}</span>
         <q-space />
         <q-toggle
           v-model="appTheme"

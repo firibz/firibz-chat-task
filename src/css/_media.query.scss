@@ -1,0 +1,32 @@
+//max queries
+@media only screen and (max-width: $breakpoint-lg-max) {
+}
+
+@media only screen and (max-width: $breakpoint-md-max) {
+}
+
+@media only screen and (max-width: $breakpoint-sm-max) {
+}
+
+@media only screen and (max-width: $breakpoint-xs-max) {
+   .drawer-user-name-width{
+    max-width: calc(100vw - 128px);
+  }
+}
+
+//-----------------------------------------------------------
+//min queries
+@media only screen and (min-width: $breakpoint-xl-min) {
+}
+
+@media only screen and (min-width: $breakpoint-lg-min) {
+}
+
+@media only screen and (min-width: $breakpoint-md-min) {
+}
+
+@media only screen and (min-width: $breakpoint-sm-min) {
+   .drawer-user-name-width{
+    max-width: 179px;
+  }
+}

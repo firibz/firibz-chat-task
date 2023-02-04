@@ -3,7 +3,7 @@
 @import './quasar.variables.scss',  'quasar/src/css/variables.sass';
 @import 'dark.theme';
 @import 'light.theme';
-// @import "media.query";
+@import "media.query";
 
 :root {
   --q-dark: #2c2a50;
