@@ -1,11 +1,21 @@
 <template>
-  <q-page ref="pageChat" class="flex column">
-    <q-banner
-      v-if="!otherUserDetails.online"
-      class="bg-grey-4 text-center fixed-top"
-    >
+  <q-page ref="pageChat" class="flex column chat-background-pattern">
+    <!-- <q-banner v-if="!otherUserDetails.online" class="text-center">
       {{ otherUserDetails.name }} is offline.
-    </q-banner>
+    </q-banner> -->
+    <q-page-sticky
+      v-if="
+        otherUserDetails &&
+        Object.keys(otherUserDetails).length > 0 &&
+        !otherUserDetails.online
+      "
+      expand
+      position="top"
+    >
+      <q-banner class="full-width text-center">
+        {{ otherUserDetails.name }} is offline.
+      </q-banner>
+    </q-page-sticky>
     <!-- <q-inner-loading v-if="messagesLoading" :showing="true">
       <q-spinner-hearts color="teal" size="7em" />
       <div class="text-bold text-center text-teal">Loading...</div>
@@ -21,26 +31,40 @@
         :name="message.from == 'me' ? userDetails.name : otherUserDetails.name"
         :text="[message.text]"
         :sent="message.from == 'me' ? true : false"
-        :bg-color="message.from == 'me' ? 'white' : 'light-green-2'"
+        :text-color="message.from == 'me' ? 'system-content' : 'system-dark'"
+        :bg-color="message.from == 'me' ? 'chat-from-me' : 'system-success'"
       />
     </div>
     <new-chat-section v-else />
-    <q-footer>
+    <q-footer class="bg-system-section">
       <q-form @submit="sendMessage" class="full-width">
-        <q-toolbar class="bg-grey-3 text-black row">
-          <q-btn round flat icon="insert_emoticon" class="q-mr-sm" />
+        <q-toolbar class="row">
+          <q-btn
+            color="system-primary"
+            round
+            flat
+            icon="insert_emoticon"
+            class="q-mr-sm"
+          />
           <q-input
-            rounded
-            outlined
+            borderless
             dense
-            class="WAL__field col-grow q-mr-sm"
-            bg-color="white"
+            class="full-width system-white-input"
             v-model="newMessage"
             @blur="scrollToBottom"
             ref="newMessage"
             placeholder="Type a message"
           />
-          <q-btn round dense flat type="submit" color="indigo" icon="send" />
+          <q-btn
+            round
+            dense
+            flat
+            type="submit"
+            class="q-ml-sm"
+            color="system-primary"
+            icon="send"
+            :disable="!newMessage"
+          />
         </q-toolbar>
       </q-form>
     </q-footer>

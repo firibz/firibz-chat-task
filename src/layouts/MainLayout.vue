@@ -1,7 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header v-if="$route.fullPath.includes('/chat')" elevated>
-      <q-toolbar class="bg-grey-3 text-black">
+    <q-header
+      class="system-header"
+      v-if="$route.fullPath.includes('/chat')"
+      elevated
+    >
+      <q-toolbar>
         <!-- <q-btn round flat icon="keyboard_arrow_left" class="q-mr-sm" to="/" /> -->
         <q-btn to="/" icon="keyboard_arrow_left" flat round class="q-mr-sm" />
         <q-btn round flat>
@@ -51,19 +55,27 @@
       :content-style="
         $q.screen.gt.xs ? 'width:300px' : 'width:100vw !important'
       "
-      content-class="bg-white"
+      content-class="system-drawer overflow-hidden"
       show-if-above
-      bordered
       :breakpoint="0"
     >
-      <q-toolbar class="bg-grey-3">
+      <q-toolbar>
         <!-- <q-btn round flat icon="menu" @click="toggleLeftDrawer" /> -->
         <q-avatar class="cursor-pointer q-ml-sm">
           <img src="~assets/axon-logo.webp" />
         </q-avatar>
         <span class="text-bold text-teal q-ml-sm">{{ userDetails.name }}</span>
         <q-space />
-
+        <q-toggle
+          v-model="appTheme"
+          aria-label="switch-theme-btn"
+          :color="appTheme ? 'amber' : 'indigo-11'"
+          checked-icon="mdi-brightness-7"
+          class="text-blue q-mr-xs"
+          keep-color
+          unchecked-icon="mdi-brightness-2"
+          @input="toggleTheme"
+        />
         <q-btn round flat icon="more_vert">
           <q-menu auto-close :offset="[110, 8]">
             <q-list style="min-width: 150px">
@@ -95,7 +107,6 @@
 
     <q-page-container
       v-if="$route.fullPath.includes('/chat') || $q.screen.gt.xs"
-      class="bg-grey-2"
     >
       <router-view />
     </q-page-container>
@@ -173,7 +184,18 @@ export default {
       message: "",
       currentConversationIndex: 0,
       conversations: conversations,
+      appTheme: true,
     };
+  },
+  created() {
+    let dark = JSON.parse(localStorage.getItem("dark"));
+    dark = typeof dark === "boolean" ? dark : this.$q.dark.isActive;
+
+    if (dark !== undefined && dark !== null) {
+      this.appTheme = !dark;
+    } else {
+      this.appTheme = true;
+    }
   },
   methods: {
     ...mapActions("user", ["logoutUser"]),
@@ -182,6 +204,12 @@ export default {
     },
     setCurrentConversation(index) {
       this.currentConversationIndex = index;
+    },
+    toggleTheme(value) {
+      console.log("value");
+      console.log(value);
+      this.$q.dark.set(!value);
+      localStorage.setItem("dark", JSON.stringify(!value));
     },
   },
 };

@@ -1,6 +1,126 @@
 // app global css in SCSS form
+// app global css in SCSS
+@import './quasar.variables.scss',  'quasar/src/css/variables.sass';
+@import 'dark.theme';
+@import 'light.theme';
+// @import "media.query";
+
+:root {
+  --q-dark: #2c2a50;
+  --q-system-dark: #1d1b2f;
+  --q-system-semi-dark: #222041;
+  --q-color-system-grey: #737373;
+  --q-color-system-negative: #ea338f;
+  --q-color-system-success: #99ffb1;
+  --q-color-system-primary-light: #3f51b5;
+  --q-color-system-primary-dark: #8c9eff;
+  --q-color-system-caption-light: #8c9eff;
+  --q-color-system-caption-dark: #00c9ff;
+  --q-color-system-section-light: #ffffff;
+  --q-color-system-section-dark: #2c2a50;
+
+  --q-color-system-pink-light: #ffe2e2;
+  --q-color-system-pink-dark: #f14a85;
+  --q-color-system-blue-light: #c7ddfc;
+  --q-color-system-blue-dark: #00c9ff;
+  --q-color-system-yellow-light: #feffda;
+  --q-color-system-yellow-dark: #ffc107;
+}
+.text-system-negative {
+  color: var(--q-color-system-negative) !important;
+}
+.bg-system-negative {
+  background: var(--q-color-system-negative) !important;
+}
+
+.text-system-success {
+  color: var(--q-color-system-success) !important;
+}
+.bg-system-success {
+  background: var(--q-color-system-success) !important;
+}
+
+.text-system-grey {
+  color: var(--q-color-system-grey) !important;
+}
+.bg-system-grey {
+  background: var(--q-color-system-grey) !important;
+}
+
+.text-system-semi-dark {
+  color: var(--q-system-semi-dark) !important;
+}
+.bg-system-semi-dark {
+  background: var(--q-system-semi-dark) !important;
+}
+
+.text-system-dark {
+  color: var(--q-system-dark) !important;
+}
+.bg-system-dark {
+  background: var(--q-system-dark) !important;
+}
+
 .online-status{
     position: absolute;
     bottom: 0;
     right: 5%
+}
+
+.custom-round-borders, %system-input .q-field__inner, %system-input .q-field__input, .system-section {
+  border-radius: 8px !important;
+}
+
+%system-input .q-field__native {
+  padding: 0;
+}
+
+%system-input .q-field__native .q-field__input {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  height: 100%;
+}
+
+%system-input .q-field__inner {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+%system-input.q-field--error .q-field__inner {
+  border-bottom: 1px dashed $negative !important;
+}
+
+.system-blue-input {
+  @extend %system-input;
+}
+
+.system-white-input {
+  @extend %system-input;
+}
+
+.system-white-input .q-field__inner {
+  @extend .custom-round-borders;
+  @extend .primary-borders;
+}
+
+.system-card {
+  @extend .custom-round-borders;
+  @extend .primary-borders;
+  position: relative;
+}
+
+.system-hr {
+  border-width: 2px 0 0 0 !important;
+  border-style: solid;
+  margin: 2px 0 0 0 !important;
+  width: 100%;
+}
+
+.bg-blur {
+  background: rgba(0, 0, 0, .3);
+  -webkit-backdrop-filter: saturate(150%) blur(7px);
+  backdrop-filter: saturate(150%) blur(7px);
+}
+.q-page-sticky {
+  z-index: 9;
 }

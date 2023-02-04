@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header class="system-header" elevated>
       <q-toolbar>
         <q-btn
           v-if="$route.fullPath.includes('/chat')"

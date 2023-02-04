@@ -1,12 +1,10 @@
 <template>
   <div class="full-width" style="height: calc(100% - 50px)">
-    <q-toolbar class="bg-grey-2">
+    <q-toolbar>
       <q-input
-        rounded
-        outlined
+        borderless
         dense
-        class="WAL__field full-width"
-        bg-color="white"
+        class="system-blue-input full-width"
         v-model="search"
         placeholder="Search users"
         clearable
@@ -17,11 +15,9 @@
       </q-input>
     </q-toolbar>
     <q-scroll-area style="height: calc(100% - 50px)">
-      <q-list
-        separator
-        v-if="filteredUsers && Object.keys(filteredUsers).length > 0"
-      >
+      <q-list v-if="filteredUsers && Object.keys(filteredUsers).length > 0">
         <q-item
+          active-class="text-bold text-system-primary"
           v-for="(user, key) in filteredUsers"
           :key="key"
           :to="'/chat/' + key"
@@ -32,11 +28,15 @@
             <!-- <q-avatar>
                 <img :src="conversation.avatar" />
               </q-avatar> -->
-            <q-avatar color="indigo" text-color="white" class="relative">
+            <q-avatar
+              color="system-primary"
+              text-color="white"
+              class="relative"
+            >
               {{ user.name.charAt(0) }}
               <q-badge
                 v-if="user.online"
-                color="light-green"
+                color="system-success"
                 rounded
                 class="online-status"
               />

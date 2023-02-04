@@ -1,0 +1,187 @@
+.body--light {
+  .text-system-primary {
+    color: var(--q-color-system-primary-light) !important;
+  }
+  .bg-system-primary {
+    background: var(--q-color-system-primary-light) !important;
+  }
+
+  .text-system-secondary {
+    color: $indigo !important;
+  }
+  .bg-system-secondary {
+    color: $indigo !important;
+  }
+
+  .text-system-caption {
+    color: var(--q-color-system-caption-light) !important;
+  }
+  .bg-system-caption {
+    background: var(--q-color-system-caption-light) !important;
+  }
+
+  .text-system-content {
+    color: var(--q-system-dark) !important;
+  }
+  .bg-system-content {
+    background: var(--q-system-dark) !important;
+  }
+
+  .text-system-cyan {
+    color: $cyan !important;
+  }
+  .bg-system-cyan {
+    background: $cyan !important;
+  }
+
+  .text-system-pink {
+    color: var(--q-color-system-pink-dark) !important;
+  }
+  .bg-system-pink {
+    background: var(--q-color-system-pink-dark) !important;
+  }
+
+  .text-chat-from-me {
+    color: #e0e0e0 !important;
+  }
+  .bg-chat-from-me {
+    background: #e0e0e0 !important;
+  }
+
+  .system-header {
+    background: var(--q-color-system-primary-light) !important;
+  }
+  .system-footer {
+    background: $grey-2 !important;
+  }
+  .system-drawer {
+    background: var(--q-color-system-section-light) !important;
+  }
+  .system-section, .bg-system-section {
+    background: var(--q-color-system-section-light) !important;
+  }
+  .system-tooltip {
+    background: var(--q-color-system-primary-light) !important;
+  }
+
+  .system-page, #q-app {
+    background: $grey-2 !important;
+  }
+
+  .primary-borders {
+    border: 1px var(--q-color-system-primary-light) solid;
+  }
+
+  .system-hr {
+    border-color: var(--q-color-system-primary-light);
+    //background-image: linear-gradient(to right, rgba(63, 81, 181, 0), rgba(63, 81, 181, 0.75), rgba(63, 81, 181, 0));
+  }
+
+  .bg-footer {
+    background: $grey-2;
+  }
+
+  hr.stylized-hr {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(3, 169, 244, 0), rgba(3, 169, 244, 0.75), rgba(3, 169, 244, 0));
+  }
+
+  .chat-background-pattern {
+    background-image: linear-gradient(45deg, transparent 20%, #c5cae9 25%, transparent 25%), linear-gradient(-45deg, transparent 20%, #c5cae9 25%, transparent 25%), linear-gradient(-45deg, transparent 75%, #c5cae9 80%, transparent 0);
+    background-size: 30px 30px, 30px 30px;
+  }
+
+  @mixin systemInputBg($bgColor, $focusBgColor) {
+    .q-field__inner {
+      background-color: $bgColor;
+    }
+
+    &.q-field--focused .q-field__inner {
+      background-color: $focusBgColor;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover {
+      -webkit-box-shadow: 0 0 0 1000px $bgColor inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px $focusBgColor inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+  @mixin systemInputColor($color) {
+    .q-field__inner input,
+    .q-field__input input,
+    .q-field__inner span,
+    textarea {
+      color: $color;
+      font-weight: bold;
+    }
+    .q-field__inner input::placeholder,
+    .q-field__input input::placeholder,
+    textarea::placeholder {
+      color: var(--q-color-system-grey);
+      font-weight: bold;
+    }
+    .q-field__inner input:-ms-input-placeholder,
+    .q-field__input input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder {
+      color: var(--q-color-system-grey);
+      font-weight: bold;
+    }
+    .q-field__inner input::-ms-input-placeholder,
+    .q-field__input input::-ms-input-placeholder,
+    textarea::-ms-input-placeholder {
+      color: var(--q-color-system-grey);
+      font-weight: bold;
+    }
+    .q-spinner {
+      color: $color;
+    }
+    &.q-field--readonly .q-field__inner {
+      border: 1px dashed var(--q-color-system-grey);
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      -webkit-text-fill-color: $color;
+      caret-color: $color;
+    }
+  }
+
+  @mixin systemInputBorder($borderColor, $focusBorderColor) {
+    .q-field__inner {
+      border-left: 1px solid $borderColor;
+    }
+    &.q-field--focused .q-field__inner {
+      border-left: 3px solid $focusBorderColor;
+    }
+  }
+
+  .system-blue-input {
+    @include systemInputBg($blue-1, $blue-1);
+    @include systemInputColor($cyan);
+    @include systemInputBorder($blue-1, $indigo);
+  }
+
+  .system-white-input {
+    @include systemInputBg(#ffffff, #ffffff);
+    @include systemInputColor($cyan);
+    @include systemInputBorder($indigo, $indigo);
+  }
+}
