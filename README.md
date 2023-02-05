@@ -11,6 +11,8 @@ npm install
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
+yarn quasar dev
+# or
 quasar dev
 ```
 
@@ -24,6 +26,8 @@ npm run lint
 
 ### Build the app for production
 ```bash
+yarn quasar build
+# or
 quasar build
 ```
 
