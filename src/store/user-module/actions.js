@@ -29,8 +29,8 @@ export function registerUser({ dispatch }, payload) {
       dispatch("alert/success", "Your account is registered successfully.", {
         root: true,
       });
-      this.$router.push("/");
-      // setting user details in the store is handled in handleAuthStateChanged action
+      // this.$router.push("/");
+      // setting user details in the store and redirecting is handled in handleAuthStateChanged action
     })
     .catch((error) => {
       dispatch("alert/error", error.message, { root: true });
@@ -41,8 +41,8 @@ export function registerUser({ dispatch }, payload) {
 export function loginUser({ dispatch }, payload) {
   signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
-      this.$router.push("/");
-      // setting user details in the store is handled in handleAuthStateChanged action
+      // this.$router.push("/");
+      // setting user details in the store and redirecting is handled in handleAuthStateChanged action
     })
     .catch((error) => {
       dispatch("alert/error", error.message, { root: true });
@@ -51,8 +51,12 @@ export function loginUser({ dispatch }, payload) {
 }
 
 export function logoutUser() {
-  signOut(firebaseAuth);
-  // removing user details in the store is handled in handleAuthStateChanged action
+  signOut(firebaseAuth).then(() => {
+    localStorage.removeItem("user");
+    // this.$router.go();
+    // resetting the store and redirecting is handled in handleAuthStateChanged action
+    // and then in firebaseUpdateUser action
+  });
 }
 
 export function handleAuthStateChanged({ commit, dispatch, state }) {
@@ -72,20 +76,26 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
               email: userDetails.email,
               userId: userId,
             });
+            dispatch("firebaseUpdateUser", {
+              userId: userId,
+              updates: {
+                online: true,
+              },
+            });
+            dispatch("firebaseGetUsers");
+            if (
+              this.$router.currentRoute.fullPath === "/login" ||
+              this.$router.currentRoute.fullPath === "/register" ||
+              this.$router.currentRoute.fullPath === "/auth"
+            ) {
+              this.$router.push("/");
+            }
           }
         },
         {
           onlyOnce: true,
         }
       );
-      dispatch("firebaseUpdateUser", {
-        userId: userId,
-        updates: {
-          online: true,
-        },
-      });
-      dispatch("firebaseGetUsers");
-      // this.$router.push("/");
     } else {
       // User is logged out.
       dispatch("firebaseUpdateUser", {
@@ -94,20 +104,20 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
           online: false,
         },
       });
-      commit("setUserDetails", {});
-      localStorage.removeItem("user");
-
-      if (this.$router.currentRoute.meta.requiresAuth) {
-        console.log("logged out");
-        this.$router.replace("/auth");
-      }
     }
   });
 }
 
 export function firebaseUpdateUser({}, payload) {
   if (payload.userId) {
-    update(ref(firebaseDb, "users/" + payload.userId), payload.updates);
+    update(ref(firebaseDb, "users/" + payload.userId), payload.updates).then(
+      () => {
+        if (payload.updates.online === false) {
+          localStorage.removeItem("user");
+          this.$router.go();
+        }
+      }
+    );
   }
 }
 

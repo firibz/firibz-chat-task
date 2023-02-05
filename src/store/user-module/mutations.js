@@ -14,5 +14,5 @@ export function addAllUsers(state, payload) {
   state.users = payload;
 }
 export function updateUser(state, payload) {
-  Vue.set(state.users[payload.userId], payload.userDetails);
+  Object.assign(state.users[payload.userId], payload.userDetails);
 }

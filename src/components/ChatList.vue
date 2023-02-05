@@ -37,7 +37,7 @@
               text-color="white"
               class="relative"
             >
-              {{ user.name.charAt(0) }}
+              <span v-if="user.name">{{ user.name.charAt(0) }}</span>
               <q-badge
                 v-if="user.online"
                 color="system-success"
