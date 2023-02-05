@@ -2,7 +2,11 @@
   <q-layout view="lHh Lpr lFf">
     <q-drawer
       v-model="leftDrawerOpen"
-      v-if="!$route.fullPath.includes('/chat') || $q.screen.gt.xs"
+      v-if="
+        (!$route.fullPath.includes('/chat') &&
+          !$route.fullPath.includes('/profile')) ||
+        $q.screen.gt.xs
+      "
       :content-style="
         $q.screen.gt.xs ? 'width:300px' : 'width:100vw !important'
       "
@@ -79,7 +83,11 @@
     </q-drawer>
 
     <q-page-container
-      v-if="$route.fullPath.includes('/chat') || $q.screen.gt.xs"
+      v-if="
+        $route.fullPath.includes('/chat') ||
+        $route.fullPath.includes('/profile') ||
+        $q.screen.gt.xs
+      "
     >
       <router-view />
     </q-page-container>
