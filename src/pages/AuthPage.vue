@@ -62,6 +62,7 @@ import { mapState } from "vuex";
 import LoginRegister from "components/LoginRegister.vue";
 
 export default {
+  name: "AuthPage",
   components: { LoginRegister },
   data() {
     return {

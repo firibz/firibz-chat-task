@@ -10,7 +10,7 @@
       <q-toolbar>
         <!-- <q-btn round flat icon="keyboard_arrow_left" class="q-mr-sm" to="/" /> -->
         <q-btn to="/" icon="keyboard_arrow_left" flat round class="q-mr-sm" />
-        <q-btn round flat>
+        <q-btn :to="'/profile/' + $route.params.otherUserId" round flat>
           <q-avatar>
             <img
               src="https://cdn-icons-png.flaticon.com/512/1141/1141031.png"

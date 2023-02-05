@@ -22,7 +22,7 @@
 const routes = [
   {
     path: "/auth",
-    component: () => import("pages/PageAuth.vue"),
+    component: () => import("src/pages/AuthPage.vue"),
   },
   {
     path: "/",
@@ -31,6 +31,16 @@ const routes = [
       {
         path: "",
         component: () => import("pages/Index.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/profile",
+        component: () => import("pages/ProfilePage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/profile/:otherUserId",
+        component: () => import("pages/ProfilePage.vue"),
         meta: { requiresAuth: true },
       },
       {

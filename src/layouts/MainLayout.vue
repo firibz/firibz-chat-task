@@ -12,9 +12,11 @@
     >
       <q-toolbar>
         <!-- <q-btn round flat icon="menu" @click="toggleLeftDrawer" /> -->
-        <q-avatar class="cursor-pointer q-ml-sm">
-          <img src="~assets/axon-logo.webp" />
-        </q-avatar>
+        <q-btn round to="/profile">
+          <q-avatar class="cursor-pointer q-ml-sm">
+            <img src="~assets/axon-logo.webp" />
+          </q-avatar>
+        </q-btn>
         <span class="text-bold text-teal q-ml-sm ellipsis">{{
           userDetails.name
         }}</span>
@@ -38,7 +40,7 @@
                 </q-item-section>
                 <q-item-section>New group</q-item-section>
               </q-item>
-              <q-item clickable>
+              <q-item to="/profile" clickable>
                 <q-item-section avatar>
                   <q-icon name="mdi-account"></q-icon>
                 </q-item-section>
