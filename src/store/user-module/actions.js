@@ -73,8 +73,6 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
         (snapshot) => {
           if (snapshot.exists()) {
             let userDetails = snapshot.val();
-            console.log("userDetails");
-            console.log(userDetails);
             commit("SET_USER_DETAILS", {
               name: userDetails.name,
               email: userDetails.email,

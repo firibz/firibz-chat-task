@@ -122,8 +122,6 @@ export default {
       this.leftDrawerOpen = !this.leftDrawerOpen;
     },
     toggleTheme(value) {
-      console.log("value");
-      console.log(value);
       this.$q.dark.set(!value);
       localStorage.setItem("dark", JSON.stringify(!value));
     },

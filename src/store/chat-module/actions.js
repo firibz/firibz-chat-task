@@ -15,7 +15,6 @@ export function firebaseGetMessages(
   get(messagesRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
         commit("ADD_ALL_MESSAGES", snapshot.val());
       } else {
         console.log("No data available");

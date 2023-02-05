@@ -7,7 +7,7 @@
           loop
           mode="normal"
           :src="'/animations/new-chat-' + index + '.json'"
-          style="height: 320px; width: 300px"
+          style="height: 300px; width: 300px"
         ></lottie-player>
         <div class="text-bold text-center">No messages here yet</div>
         <div class="text-bold text-center">Lets send a message...</div>

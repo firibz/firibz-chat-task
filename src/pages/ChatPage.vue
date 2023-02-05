@@ -181,7 +181,6 @@ export default {
     },
   },
   mounted() {
-    console.log("mounted PageChat");
     this.$refs.newMessage.focus();
     this.firebaseGetMessages(this.$route.params.otherUserId);
   },
@@ -189,7 +188,6 @@ export default {
     this.firebaseStopGettingMessages();
   },
   beforeRouteUpdate(to, from, next) {
-    console.log("beforeRouteUpdate");
     if (to.path === "/chat/" + to.params.otherUserId) {
       this.$refs.newMessage.focus();
       this.firebaseStopGettingMessages();

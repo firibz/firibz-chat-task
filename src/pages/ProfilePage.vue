@@ -5,12 +5,14 @@
 
       <q-card-section>
         <div class="row no-wrap items-center">
-          <div class="col text-h6 ellipsis">{{ userDetails.name }}</div>
+          <div class="col text-h6 ellipsis text-center">
+            {{ userDetails.name }}
+          </div>
         </div>
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        <div class="text-subtitle1">{{ userDetails.email }}</div>
+        <div class="text-subtitle1 text-center">{{ userDetails.email }}</div>
       </q-card-section>
 
       <q-separator />
