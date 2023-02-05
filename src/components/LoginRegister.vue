@@ -50,8 +50,8 @@ export default {
     return {
       formData: {
         name: "",
-        email: "danny@test.com",
-        password: "123456",
+        email: "",
+        password: "",
       },
       validation: validation,
     };
