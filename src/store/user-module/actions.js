@@ -17,7 +17,8 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-export function registerUser({ dispatch }, payload) {
+export function registerUser({ commit, dispatch }, payload) {
+  commit("SHOW_AUTH_LOADING", true);
   createUserWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
       let userId = firebaseAuth.currentUser.uid;
@@ -38,7 +39,8 @@ export function registerUser({ dispatch }, payload) {
     });
 }
 
-export function loginUser({ dispatch }, payload) {
+export function loginUser({ commit, dispatch }, payload) {
+  commit("SHOW_AUTH_LOADING", true);
   signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
     .then((response) => {
       // this.$router.push("/");
@@ -83,6 +85,7 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
               },
             });
             dispatch("firebaseGetUsers");
+            commit("SHOW_AUTH_LOADING", false);
             if (this.$router.currentRoute.fullPath === "/auth") {
               this.$router.push("/");
             }

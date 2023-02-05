@@ -31,6 +31,7 @@
         class="full-width q-mt-lg"
         type="submit"
         :label="tab"
+        :disable="authLoading"
       />
     </div>
   </q-form>
@@ -40,6 +41,7 @@
 import { mapActions } from "vuex";
 import SystemInput from "components/inputs/SystemInput.vue";
 import { validation } from "../helpers/validation";
+import { mapState } from "vuex";
 
 export default {
   props: ["tab"],
@@ -53,6 +55,9 @@ export default {
       },
       validation: validation,
     };
+  },
+  computed: {
+    ...mapState("user", ["authLoading"]),
   },
   methods: {
     ...mapActions("user", ["registerUser", "loginUser"]),

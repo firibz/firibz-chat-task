@@ -45,6 +45,10 @@
               <login-register :tab="tab" />
             </q-tab-panel>
           </q-tab-panels>
+          <q-inner-loading v-if="authLoading" :showing="true">
+            <q-spinner-hearts color="teal" size="8em" />
+            <div class="text-bold text-center text-teal">Loading...</div>
+          </q-inner-loading>
         </div>
       </div>
     </q-card>
@@ -54,15 +58,18 @@
 <script>
 // the import ia essential in order to use vue-lottie component
 import * as LottiePlayer from "@lottiefiles/lottie-player";
+import { mapState } from "vuex";
+import LoginRegister from "components/LoginRegister.vue";
 
 export default {
+  components: { LoginRegister },
   data() {
     return {
       tab: "login",
     };
   },
-  components: {
-    "login-register": require("components/LoginRegister.vue").default,
+  computed: {
+    ...mapState("user", ["authLoading"]),
   },
 };
 </script>

@@ -3,6 +3,9 @@ import Vue from "vue";
 export function SHOW_LOADING(state, payload) {
   state.usersLoading = payload;
 }
+export function SHOW_AUTH_LOADING(state, payload) {
+  state.authLoading = payload;
+}
 export function SET_USER_DETAILS(state, payload) {
   localStorage.setItem("user", JSON.stringify(payload.userId));
   state.userDetails = payload;

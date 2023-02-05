@@ -3,5 +3,6 @@ export default function () {
     userDetails: {},
     users: {},
     usersLoading: false,
+    authLoading: false,
   };
 }
