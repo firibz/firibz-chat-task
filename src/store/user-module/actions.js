@@ -34,6 +34,7 @@ export function registerUser({ commit, dispatch }, payload) {
       // setting user details in the store and redirecting is handled in handleAuthStateChanged action
     })
     .catch((error) => {
+      commit("SHOW_AUTH_LOADING", false);
       dispatch("alert/error", error.message, { root: true });
       console.log(error.message);
     });
@@ -47,6 +48,7 @@ export function loginUser({ commit, dispatch }, payload) {
       // setting user details in the store and redirecting is handled in handleAuthStateChanged action
     })
     .catch((error) => {
+      commit("SHOW_AUTH_LOADING", false);
       dispatch("alert/error", error.message, { root: true });
       console.log(error.message);
     });

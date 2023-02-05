@@ -33,21 +33,39 @@
           <q-menu auto-close :offset="[110, 8]">
             <q-list style="min-width: 150px">
               <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon name="mdi-account-multiple-plus"></q-icon>
+                </q-item-section>
                 <q-item-section>New group</q-item-section>
               </q-item>
               <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon name="mdi-account"></q-icon>
+                </q-item-section>
                 <q-item-section>Profile</q-item-section>
               </q-item>
               <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon name="mdi-archive"></q-icon>
+                </q-item-section>
                 <q-item-section>Archived</q-item-section>
               </q-item>
               <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon name="mdi-heart"></q-icon>
+                </q-item-section>
                 <q-item-section>Favorites</q-item-section>
               </q-item>
               <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon name="mdi-cogs"></q-icon>
+                </q-item-section>
                 <q-item-section>Settings</q-item-section>
               </q-item>
               <q-item @click="logoutUser" clickable>
+                <q-item-section avatar>
+                  <q-icon name="mdi-logout" color="system-negative"></q-icon>
+                </q-item-section>
                 <q-item-section>Logout</q-item-section>
               </q-item>
             </q-list>
