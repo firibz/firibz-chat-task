@@ -11,12 +11,12 @@ export function firebaseGetMessages(
     rootState.user.userDetails.userId ||
     JSON.parse(localStorage.getItem("user"));
   messagesRef = ref(firebaseDb, "chats/" + userId + "/" + otherUserId);
-  commit("showLoading", true);
+  commit("SHOW_LOADING", true);
   get(messagesRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
-        commit("addAllMessages", snapshot.val());
+        commit("ADD_ALL_MESSAGES", snapshot.val());
       } else {
         console.log("No data available");
       }
@@ -26,12 +26,12 @@ export function firebaseGetMessages(
       console.error(error);
     })
     .finally(() => {
-      commit("showLoading", false);
+      commit("SHOW_LOADING", false);
     });
   onChildAdded(messagesRef, (snapshot) => {
     let messageDetails = snapshot.val();
     let messageId = snapshot.key;
-    commit("addMessage", {
+    commit("ADD_MESSAGE", {
       messageId,
       messageDetails,
     });
@@ -41,7 +41,7 @@ export function firebaseGetMessages(
 export function firebaseStopGettingMessages({ commit }) {
   if (messagesRef) {
     off(messagesRef, "child_added");
-    commit("clearMessages");
+    commit("CLEAR_MESSAGES");
   }
 }
 

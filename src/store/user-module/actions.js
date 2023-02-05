@@ -71,7 +71,7 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
             let userDetails = snapshot.val();
             console.log("userDetails");
             console.log(userDetails);
-            commit("setUserDetails", {
+            commit("SET_USER_DETAILS", {
               name: userDetails.name,
               email: userDetails.email,
               userId: userId,
@@ -123,11 +123,11 @@ export function firebaseUpdateUser({}, payload) {
 
 export function firebaseGetUsers({ commit }) {
   const usersRef = ref(firebaseDb, "users");
-  commit("showLoading", true);
+  commit("SHOW_LOADING", true);
   get(ref(firebaseDb, "users"))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        commit("addAllUsers", snapshot.val());
+        commit("ADD_ALL_USERS", snapshot.val());
       } else {
         console.log("No data available");
       }
@@ -137,13 +137,13 @@ export function firebaseGetUsers({ commit }) {
       console.error(error);
     })
     .finally(() => {
-      commit("showLoading", false);
+      commit("SHOW_LOADING", false);
     });
 
   onChildAdded(usersRef, (snapshot) => {
     let userDetails = snapshot.val();
     let userId = snapshot.key;
-    commit("addUser", {
+    commit("ADD_USER", {
       userId,
       userDetails,
     });
@@ -152,7 +152,7 @@ export function firebaseGetUsers({ commit }) {
   onChildChanged(usersRef, (snapshot) => {
     let userDetails = snapshot.val();
     let userId = snapshot.key;
-    commit("updateUser", {
+    commit("UPDATE_USER", {
       userId,
       userDetails,
     });

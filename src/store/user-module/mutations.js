@@ -1,18 +1,18 @@
 import Vue from "vue";
 
-export function showLoading(state, payload) {
+export function SHOW_LOADING(state, payload) {
   state.usersLoading = payload;
 }
-export function setUserDetails(state, payload) {
+export function SET_USER_DETAILS(state, payload) {
   localStorage.setItem("user", JSON.stringify(payload.userId));
   state.userDetails = payload;
 }
-export function addUser(state, payload) {
+export function ADD_USER(state, payload) {
   Vue.set(state.users, payload.userId, payload.userDetails);
 }
-export function addAllUsers(state, payload) {
+export function ADD_ALL_USERS(state, payload) {
   state.users = payload;
 }
-export function updateUser(state, payload) {
+export function UPDATE_USER(state, payload) {
   Object.assign(state.users[payload.userId], payload.userDetails);
 }
