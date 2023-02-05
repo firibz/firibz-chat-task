@@ -3,12 +3,7 @@ export default ({ router, store, Vue }) => {
     let user = JSON.parse(localStorage.getItem("user"));
 
     // redirect to index page if already logged in
-    if (
-      (to.path === "/login" ||
-        to.path === "/register" ||
-        to.path === "/auth") &&
-      user
-    ) {
+    if (to.path === "/auth" && user) {
       return next({ path: "/" });
     }
     // redirecting to login page is handled in handleAuthStateChanged action

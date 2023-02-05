@@ -22,15 +22,7 @@
 const routes = [
   {
     path: "/auth",
-    component: () => import("layouts/MyLayout.vue"),
-    children: [
-      // { path: "", component: () => import("pages/PageUsers.vue") },
-      // {
-      //   path: "/chat/:otherUserId",
-      //   component: () => import("pages/PageChat.vue"),
-      // },
-      { path: "/", component: () => import("pages/PageAuth.vue") },
-    ],
+    component: () => import("pages/PageAuth.vue"),
   },
   {
     path: "/",
@@ -47,14 +39,6 @@ const routes = [
         meta: { requiresAuth: true },
       },
     ],
-  },
-  {
-    path: "/login",
-    component: () => import("pages/LoginPage.vue"),
-  },
-  {
-    path: "/register",
-    component: () => import("pages/RegisterPage.vue"),
   },
 ];
 

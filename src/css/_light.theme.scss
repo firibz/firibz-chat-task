@@ -64,8 +64,8 @@
     background: var(--q-color-system-primary-light) !important;
   }
 
-  .system-page, #q-app {
-    background: $grey-2 !important;
+  .system-page, #q-app, .landing-page, .landing-page {
+    background-color: $grey-2 !important;
   }
 
   .primary-borders {
@@ -87,7 +87,7 @@
     background-image: linear-gradient(to right, rgba(3, 169, 244, 0), rgba(3, 169, 244, 0.75), rgba(3, 169, 244, 0));
   }
 
-  .chat-background-pattern {
+  .chat-background-pattern, .landing-page {
     background-image: linear-gradient(45deg, transparent 20%, #c5cae9 25%, transparent 25%), linear-gradient(-45deg, transparent 20%, #c5cae9 25%, transparent 25%), linear-gradient(-45deg, transparent 75%, #c5cae9 80%, transparent 0);
     background-size: 30px 30px, 30px 30px;
   }

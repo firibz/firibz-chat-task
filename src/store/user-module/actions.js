@@ -83,11 +83,7 @@ export function handleAuthStateChanged({ commit, dispatch, state }) {
               },
             });
             dispatch("firebaseGetUsers");
-            if (
-              this.$router.currentRoute.fullPath === "/login" ||
-              this.$router.currentRoute.fullPath === "/register" ||
-              this.$router.currentRoute.fullPath === "/auth"
-            ) {
+            if (this.$router.currentRoute.fullPath === "/auth") {
               this.$router.push("/");
             }
           }
