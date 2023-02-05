@@ -45,10 +45,6 @@ export default {
   name: "SystemInput",
   components: { ExternalLabel },
   props: {
-    rules: {
-      type: [Object, String],
-      default: "",
-    },
     externalLabel: {
       type: String,
     },

@@ -6,6 +6,7 @@
       system-input-class="system-blue-input"
       externalLabel="Name"
       for="Name"
+      :rules="[validation.required]"
     />
     <system-input
       v-model="formData.email"
@@ -13,6 +14,7 @@
       type="email"
       externalLabel="Email"
       for="email"
+      :rules="[validation.required, validation.email]"
     />
     <system-input
       v-model="formData.password"
@@ -20,6 +22,7 @@
       type="password"
       externalLabel="Password"
       is-password
+      :rules="[validation.required, (val) => validation.minLength(val, 6)]"
     />
     <div class="row">
       <q-space />
@@ -36,6 +39,7 @@
 <script>
 import { mapActions } from "vuex";
 import SystemInput from "components/inputs/SystemInput.vue";
+import { validation } from "../helpers/validation";
 
 export default {
   props: ["tab"],
@@ -47,6 +51,7 @@ export default {
         email: "danny@test.com",
         password: "123456",
       },
+      validation: validation,
     };
   },
   methods: {
